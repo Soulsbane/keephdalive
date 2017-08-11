@@ -1,0 +1,9 @@
+.dub
+docs.json
+__dummy.html
+*.o
+*.obj
+*.a
+__test__library__
+keephdalive-test-library
+keephdalive-test-unittest
