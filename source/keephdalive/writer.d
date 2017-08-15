@@ -20,25 +20,7 @@ class KeepAliveWriter : RepeatingTimer
 	this()
 	{
 		path_.create("Raijinsoft", "keephdalive");
-		loadWriteToLocations();
-	}
-
-	void oldaddLocation(const string path)
-	{
-		locations_ ~= path;
-	}
-
-	void loadWriteToLocations()
-	{
-		immutable string locationsFile = buildNormalizedPath(path_.getDir("config"), WRITE_TO_LOCATIONS_FILENAME);
-
-		ensureFileExists(locationsFile, DEFAULT_LOCATIONS_DATA);
-		immutable auto lines = locationsFile.readText.splitLines();
-
-		foreach(filePath; lines)
-		{
-			addLocation(filePath);
-		}
+		loadLocations();
 	}
 
 	bool addLocation(const string path, const bool shouldWrite = false)
@@ -58,8 +40,6 @@ class KeepAliveWriter : RepeatingTimer
 				}
 
 				locations_ ~= normalizedFilePath;
-				//addLocation(normalizedFilePath);
-
 				writeln("Added new path: ", path);
 			}
 			else
@@ -88,6 +68,19 @@ class KeepAliveWriter : RepeatingTimer
 	}
 
 private:
+	void loadLocations()
+	{
+		immutable string locationsFile = buildNormalizedPath(path_.getDir("config"), WRITE_TO_LOCATIONS_FILENAME);
+
+		ensureFileExists(locationsFile, DEFAULT_LOCATIONS_DATA);
+		immutable auto lines = locationsFile.readText.splitLines();
+
+		foreach(filePath; lines)
+		{
+			addLocation(filePath);
+		}
+	}
+
 	bool locationAlreadyExists(const string path) const
 	{
 		return locations_.canFind(path);
