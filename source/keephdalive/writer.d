@@ -67,6 +67,11 @@ class KeepAliveWriter : RepeatingTimer
 		}
 	}
 
+	string[] getLocations()
+	{
+		return locations_;
+	}
+
 private:
 	void loadLocations()
 	{
