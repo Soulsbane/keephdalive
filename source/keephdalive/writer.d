@@ -2,22 +2,33 @@ module keephdalive.writer;
 
 import std.stdio;
 import std.datetime;
+import std.path;
+import std.file;
+import std.string;
+import std.algorithm;
 
 import simpletimers.repeating;
+import dpathutils;
+import dfileutils;
+
+immutable string WRITE_TO_LOCATIONS_FILENAME = "locations.dat";
+immutable string DEFAULT_LOCATIONS_DATA = "./\n";
+immutable string DEFAULT_WRITE_TO_FILENAME = "keephdalive.txt"; // TODO: Perhaps make it hidden.
 
 class KeepAliveWriter : RepeatingTimer
 {
 	this()
 	{
-
+		path_.create("Raijinsoft", "keephdalive");
+		loadWriteToLocations();
 	}
 
-	void addLocation(const string path)
+	void oldaddLocation(const string path)
 	{
 		locations_ ~= path;
 	}
 
-		void loadWriteToLocations()
+	void loadWriteToLocations()
 	{
 		immutable string locationsFile = buildNormalizedPath(path_.getDir("config"), WRITE_TO_LOCATIONS_FILENAME);
 
@@ -26,11 +37,11 @@ class KeepAliveWriter : RepeatingTimer
 
 		foreach(filePath; lines)
 		{
-			addPath(filePath);
+			addLocation(filePath);
 		}
 	}
 
-	bool addPath(const string path, const bool shouldWrite = false)
+	bool addLocation(const string path, const bool shouldWrite = false)
 	{
 		if(path.exists)
 		{
@@ -46,8 +57,8 @@ class KeepAliveWriter : RepeatingTimer
 					f.writeln(path);
 				}
 
-				locations_ ~= path;
-				writer_.addLocation(normalizedFilePath);
+				locations_ ~= normalizedFilePath;
+				//addLocation(normalizedFilePath);
 
 				writeln("Added new path: ", path);
 			}
@@ -64,7 +75,6 @@ class KeepAliveWriter : RepeatingTimer
 		}
 	}
 
-
 	override void onTimer()
 	{
 		immutable auto currentTime = Clock.currTime();
@@ -78,6 +88,13 @@ class KeepAliveWriter : RepeatingTimer
 	}
 
 private:
+	bool locationAlreadyExists(const string path) const
+	{
+		return locations_.canFind(path);
+	}
+
+private:
 	string[] locations_;
 	ConfigPath path_;
+	string writeToFileName_ = DEFAULT_WRITE_TO_FILENAME;
 }

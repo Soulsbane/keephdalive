@@ -9,3 +9,5 @@ configuration "library" {
 }
 
 dependency "simpletimers" version="*"
+dependency "dpathutils" version="*"
+dependency "dfileutils" version="*"
