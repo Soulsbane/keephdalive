@@ -24,7 +24,7 @@ class KeepAliveWriter : RepeatingTimer
 		loadLocations();
 	}
 
-	bool addLocation(const string path, const bool shouldWrite = false)
+	bool addLocation(const string path, const bool shouldWrite = true)
 	{
 		if(path.exists)
 		{
@@ -79,7 +79,7 @@ private:
 
 		foreach(filePath; lines)
 		{
-			addLocation(filePath);
+			addLocation(filePath, false);
 		}
 	}
 
