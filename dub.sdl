@@ -8,6 +8,10 @@ configuration "library" {
 	targetType "library"
 }
 
+configuration "unittest" {
+	dependency "fluent-asserts" version="~>0.6.5"
+}
+
 dependency "simpletimers" version="*"
 dependency "dpathutils" version="*"
 dependency "dfileutils" version="*"

@@ -56,3 +56,23 @@ struct Locations
 private:
 	string[] locations_;
 }
+
+unittest
+{
+	import fluent.asserts;
+
+	Locations locations;
+	locations.insert("Paul");
+	locations.insert("Mom");
+	locations.insert("Ben");
+	locations.insert("Tisha");
+
+	locations.front.should.equal("Paul");
+	locations.popFront();
+	locations.front.should.equal("Mom");
+
+	locations.back.should.equal("Tisha");
+	locations.popBack();
+	locations.back.should.equal("Ben");
+	locations[0].should.equal("Mom");
+}
