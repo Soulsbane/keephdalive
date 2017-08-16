@@ -10,6 +10,7 @@ import std.algorithm;
 import simpletimers.repeating;
 import dpathutils;
 import dfileutils;
+import keephdalive.locations;
 
 immutable string WRITE_TO_LOCATIONS_FILENAME = "locations.dat";
 immutable string DEFAULT_LOCATIONS_DATA = "./\n";
@@ -29,7 +30,7 @@ class KeepAliveWriter : RepeatingTimer
 		{
 			immutable string normalizedFilePath = buildNormalizedPath(path, writeToFileName_);
 			immutable string locationsFile = buildNormalizedPath(path_.getDir("config"), WRITE_TO_LOCATIONS_FILENAME);
-			immutable bool alreadyKnownLocation = locationAlreadyExists(path);
+			immutable bool alreadyKnownLocation = locations_.exists(path);
 
 			if(!alreadyKnownLocation)
 			{
@@ -39,7 +40,8 @@ class KeepAliveWriter : RepeatingTimer
 					f.writeln(path);
 				}
 
-				locations_ ~= normalizedFilePath;
+				//locations_ ~= normalizedFilePath;
+				locations_.insert(normalizedFilePath);
 				writeln("Added new path: ", path);
 			}
 			else
@@ -67,26 +69,6 @@ class KeepAliveWriter : RepeatingTimer
 		}
 	}
 
-	string[] getLocations()
-	{
-		return locations_;
-	}
-
-	@property bool empty() const
-	{
-		return locations_.length == 0;
-	}
-
-	@property ref string front()
-	{
-		return locations_[0];
-	}
-
-	void popFront()
-	{
-		locations_ = locations_[1 .. $];
-	}
-
 private:
 	void loadLocations()
 	{
@@ -101,13 +83,8 @@ private:
 		}
 	}
 
-	bool locationAlreadyExists(const string path) const
-	{
-		return locations_.canFind(path);
-	}
-
 private:
-	string[] locations_;
+	Locations locations_;
 	ConfigPath path_;
 	string writeToFileName_ = DEFAULT_WRITE_TO_FILENAME;
 }
