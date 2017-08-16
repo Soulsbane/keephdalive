@@ -72,20 +72,20 @@ class KeepAliveWriter : RepeatingTimer
 		return locations_;
 	}
 
-    @property bool empty() const
-    {
-        return locations_.length == 0;
-    }
+	@property bool empty() const
+	{
+		return locations_.length == 0;
+	}
 
-    @property ref string front()
-    {
-        return locations_[0];
-    }
+	@property ref string front()
+	{
+		return locations_[0];
+	}
 
-    void popFront()
-    {
-        locations_ = locations_[1 .. $];
-    }
+	void popFront()
+	{
+		locations_ = locations_[1 .. $];
+	}
 
 private:
 	void loadLocations()
