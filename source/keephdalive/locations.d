@@ -8,6 +8,16 @@ struct Locations
 		locations_ ~= location;
 	}
 
+	void clear()
+	{
+		locations_ = [];
+	}
+
+	size_t length()
+	{
+		return locations_.length;
+	}
+
 	bool exists(const string path) const
 	{
 		return locations_.canFind(path);
@@ -75,4 +85,8 @@ unittest
 	locations.popBack();
 	locations.back.should.equal("Ben");
 	locations[0].should.equal("Mom");
+
+	locations.length.should.equal(2);
+	locations.clear();
+	locations.length.should.equal(0);
 }
