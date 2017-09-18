@@ -8,6 +8,18 @@ struct Locations
 		locations_ ~= location;
 	}
 
+	void remove(const string location)
+	{
+		import darrayutils : remove;
+		locations_.remove(location);
+	}
+
+	void removeAll(const string location)
+	{
+		import darrayutils : removeAll;
+		locations_.removeAll(location);
+	}
+
 	void clear()
 	{
 		locations_ = [];
