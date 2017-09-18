@@ -15,3 +15,4 @@ configuration "unittest" {
 dependency "simpletimers" version="*"
 dependency "dpathutils" version="*"
 dependency "dfileutils" version="*"
+dependency "darrayutils" version="*"
