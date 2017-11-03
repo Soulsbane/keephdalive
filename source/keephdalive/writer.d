@@ -40,16 +40,13 @@ class KeepAliveWriter : RepeatingTimer
 					f.writeln(path);
 				}
 
-				//locations_ ~= normalizedFilePath;
 				locations_.insert(normalizedFilePath);
-				writeln("Added new path: ", path);
+				return true;
 			}
 			else
 			{
-				writeln("That path already exists!");
+				return false;
 			}
-
-			return true;
 		}
 		else
 		{
