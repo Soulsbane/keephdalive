@@ -8,9 +8,7 @@ configuration "library" {
 	targetType "library"
 }
 
-configuration "unittest" {
-	dependency "fluent-asserts" version="~>0.6.6"
-}
+dependency "fluent-asserts" version=">=0.6.6"
 
 dependency "simpletimers" version="*"
 dependency "dpathutils" version="*"
