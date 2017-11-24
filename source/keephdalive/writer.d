@@ -57,12 +57,12 @@ class KeepAliveWriter : RepeatingTimer
 	override void onTimer()
 	{
 		immutable auto currentTime = Clock.currTime();
-		immutable auto timeString = currentTime.toISOExtString();
 
 		foreach(file; locations_)
 		{
 			auto f = File(file, "w+");
-			f.write(timeString);
+			f.write("");
+			file.setTimes(currentTime, currentTime);
 		}
 	}
 
