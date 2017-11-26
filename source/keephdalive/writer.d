@@ -56,13 +56,9 @@ class KeepAliveWriter : RepeatingTimer
 
 	override void onTimer()
 	{
-		immutable auto currentTime = Clock.currTime();
-
 		foreach(file; locations_)
 		{
-			auto f = File(file, "w+");
-			f.write("");
-			file.setTimes(currentTime, currentTime);
+			touchFile(file);
 		}
 	}
 
