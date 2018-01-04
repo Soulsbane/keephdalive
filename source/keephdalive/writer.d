@@ -6,6 +6,7 @@ import std.path;
 import std.file;
 import std.string;
 import std.algorithm;
+import std.typecons;
 
 import simpletimers.repeating;
 import dpathutils;
@@ -24,7 +25,7 @@ class KeepAliveWriter : RepeatingTimer
 		loadLocations();
 	}
 
-	bool addLocation(const string path, const bool shouldWrite = true)
+	bool addLocation(const string path, const Flag!"shouldWrite" shouldWrite = Yes.shouldWrite)
 	{
 		if(path.exists)
 		{
@@ -72,7 +73,7 @@ private:
 
 		foreach(filePath; lines)
 		{
-			addLocation(filePath, false);
+			addLocation(filePath, No.shouldWrite);
 		}
 	}
 
