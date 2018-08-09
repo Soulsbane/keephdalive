@@ -2,13 +2,10 @@ name "keephdalive"
 description "The core of keephdalive.."
 copyright "Copyright © 2017"
 authors "Paul Crane"
-targetType "library"
-
-configuration "library" {
-	targetType "library"
-}
 
 dependency "fluent-asserts" version=">=0.6.6"
+dependency "daemonize" version="~>0.2.0"
+dependency "dlogg" version="~>0.4.1"
 
 dependency "simpletimers" version="*"
 dependency "dpathutils" version="*"
