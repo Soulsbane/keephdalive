@@ -3,6 +3,8 @@ import core.thread;
 
 import daemonize.d;
 
+import keephdalive.writer;
+
 enum SettingsUpdatedSignal = "SettingsUpdated".customSignal;
 
 alias daemon = Daemon!(
@@ -30,8 +32,10 @@ alias daemon = Daemon!(
 	{
 		while(!shouldExit())
 		{
-			Thread.sleep( dur!("msecs")( 50 ) );}
-			logger.logInfo("Exiting main function!");
+			Thread.sleep( dur!("msecs")( 50 ) );
+		}
+
+		logger.logInfo("Exiting main function!");
 
 		return 0;
 	}
