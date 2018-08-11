@@ -3,9 +3,8 @@ import core.thread;
 
 import daemonize.d;
 
-import keephdalive.writer;
-
 enum SettingsUpdatedSignal = "SettingsUpdated".customSignal;
+enum LocationsUpdatedSignal = "LocationsUpdated".customSignal;
 
 alias daemon = Daemon!(
 	"keephdalive",
@@ -24,6 +23,11 @@ alias daemon = Daemon!(
 		SettingsUpdatedSignal, (logger)
 		{
 			logger.logInfo("Updated settings...");
+			return true;
+		},
+		LocationsUpdatedSignal, (logger)
+		{
+			logger.logInfo("Updated locations...");
 			return true;
 		}
 	),
