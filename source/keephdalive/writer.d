@@ -1,4 +1,4 @@
-module keephdalive.writer;
+module keephdaliveapi.writer;
 
 import std.stdio;
 import std.datetime;
@@ -8,16 +8,16 @@ import std.string;
 import std.algorithm;
 import std.typecons;
 
-import simpletimers.repeating;
 import dpathutils;
 import dfileutils;
-import keephdalive.locations;
+import keephdaliveapi.locations;
 
 immutable string WRITE_TO_LOCATIONS_FILENAME = "locations.dat";
 immutable string DEFAULT_LOCATIONS_DATA = "./\n";
 immutable string DEFAULT_WRITE_TO_FILENAME = "keephdalive.txt"; // TODO: Perhaps make it hidden.
+immutable size_t DEFAULT_FILE_WRITE_DELAY = 5;
 
-class KeepAliveWriter : RepeatingTimer
+class KeepAliveWriter
 {
 	this()
 	{
@@ -55,18 +55,15 @@ class KeepAliveWriter : RepeatingTimer
 		}
 	}
 
-	override void onTimer()
+private	void loadLocations()
 	{
-		foreach(file; locations_)
-		{
-			touchFile(file);
-		}
-	}
-
-private:
-	void loadLocations()
-	{
+		immutable string locationsPath =  path_.getDir("config");
 		immutable string locationsFile = buildNormalizedPath(path_.getDir("config"), WRITE_TO_LOCATIONS_FILENAME);
+
+		if(!locationsPath.exists)
+		{
+			locationsPath.mkdirRecurse;
+		}
 
 		ensureFileExists(locationsFile, DEFAULT_LOCATIONS_DATA);
 		immutable auto lines = locationsFile.readText.splitLines();
