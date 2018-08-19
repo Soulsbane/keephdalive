@@ -1,5 +1,12 @@
-import core.time;
-import core.thread;
+import simpleserver;
+
+class KeepAliveApp : SimpleServer
+{
+	override void onCommand(const string[] commands)
+	{
+
+	}
+}
 
 int main(string[] arguments)
 {
