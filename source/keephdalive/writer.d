@@ -1,4 +1,4 @@
-module keephdaliveapi.writer;
+module writer;
 
 import std.stdio;
 import std.datetime;
