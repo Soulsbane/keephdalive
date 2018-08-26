@@ -1,4 +1,7 @@
 import simpleserver;
+import std.stdio : writeln;
+
+import writer;
 
 class KeepAliveApp : CommandServer
 {
@@ -6,10 +9,10 @@ class KeepAliveApp : CommandServer
 	{
 		switch(command)
 		{
-			case "restart": break;
-			case "start": break;
-			case "pause": break;
-			case "resume": break;
+			case "restart": break; // Reloads locations.dat and restarts writing.
+			case "start": break; // Seems pretty obvious.
+			case "stop": break; // Stops all writing to files.
+			case "quit": break; // Makes keephdalive process quit.
 			default: break;
 		}
 	}
@@ -22,14 +25,23 @@ class KeepAliveApp : CommandServer
 	{
 		if(command == "add" && subCommand == "location")
 		{
-			import std.stdio : writeln;
 			writeln(value);
 			// Add value
 		}
-
+		else if(command == "set" && subCommand == "delay")
+		{
+			writeln(value);
+		}
+		else
+		{
+			writeln("Invalid command: ", command);
+		}
 	}
 
 	override void onNoCommands(){}
+
+private:
+	KeepAliveWriter writer_;
 }
 
 int main(string[] arguments)
