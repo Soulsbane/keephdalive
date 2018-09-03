@@ -26,7 +26,6 @@ class KeepAliveApp : CommandServer
 		if(command == "add" && subCommand == "location")
 		{
 			writeln(value);
-			// Add value
 		}
 		else if(command == "set" && subCommand == "delay")
 		{
