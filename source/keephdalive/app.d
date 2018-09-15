@@ -1,11 +1,11 @@
-import simpleserver;
 import std.stdio : writeln;
 
 import writer;
+import simpleserver;
 
 class KeepAliveApp : CommandServer
 {
-	override void onCommand(const string command)
+	override void onCommand(Socket client, const string command)
 	{
 		switch(command)
 		{
@@ -17,11 +17,11 @@ class KeepAliveApp : CommandServer
 		}
 	}
 
-	override void onCommand(const string command, const string subCommand)
+	override void onCommand(Socket client, const string command, const string subCommand)
 	{
 	}
 
-	override void onCommand(const string command, const string subCommand, const string value)
+	override void onCommand(Socket client, const string command, const string subCommand, const string value)
 	{
 		if(command == "add" && subCommand == "location")
 		{
