@@ -11,18 +11,13 @@ import std.typecons;
 import dpathutils;
 import dfileutils;
 import simpletimers.repeating;
-import keephdaliveapi.locations;
-
-immutable string WRITE_TO_LOCATIONS_FILENAME = "locations.dat";
-immutable string DEFAULT_LOCATIONS_DATA = "./\n";
-immutable string DEFAULT_WRITE_TO_FILENAME = "keephdalive.txt"; // TODO: Perhaps make it hidden.
-immutable size_t DEFAULT_FILE_WRITE_DELAY = 5;
+import keephdaliveapi;
 
 class KeepAliveWriter : RepeatingTimer
 {
 	this()
 	{
-		path_.create("Raijinsoft", "keephdalive");
+		path_.create(COMPANY_NAME, PROGRAM_NAME);
 		loadLocations();
 	}
 
