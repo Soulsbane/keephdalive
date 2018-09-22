@@ -1,12 +1,9 @@
 module writer;
 
 import std.stdio;
-import std.datetime;
 import std.path;
 import std.file;
-import std.string;
 import std.algorithm;
-import std.typecons;
 
 import dpathutils;
 import dfileutils;
