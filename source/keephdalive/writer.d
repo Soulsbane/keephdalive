@@ -4,6 +4,7 @@ import std.stdio;
 import std.path;
 import std.file;
 import std.algorithm;
+import std.string;
 
 import dpathutils;
 import dfileutils;
