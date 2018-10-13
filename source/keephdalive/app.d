@@ -10,8 +10,8 @@ class KeepAliveApp : CommandServer
 		switch(command)
 		{
 			case "restart": break; // Reloads locations.dat and restarts writing.
-			case "start": break; // Seems pretty obvious.
-			case "stop": break; // Stops all writing to files.
+			case "start": writer_.start(); break; // Seems pretty obvious.
+			case "stop": writer_.stop(); break; // Stops all writing to files.
 			case "quit": break; // Makes keephdalive process quit.
 			default: break;
 		}
