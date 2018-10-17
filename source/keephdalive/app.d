@@ -42,11 +42,29 @@ class KeepAliveApp : CommandServer
 private:
 	KeepAliveWriter writer_;
 }
+/*
+	void dump()
+	{
+    writeln("Documents: ", writablePath(StandardPath.documents));
+    writeln("Pictures: ", writablePath(StandardPath.pictures));
+    writeln("Music: ", writablePath(StandardPath.music));
+    writeln("Videos: ", writablePath(StandardPath.videos));
+    writeln("Downloads: ", writablePath(StandardPath.downloads));
+}*/
+
 
 int main(string[] arguments)
 {
 	auto app = new KeepAliveApp;
-	app.start();
+	//app.start();
+	import keephdaliveapi.constants;
+	import dpathutils.config;
+	ConfigPath path_;
+	path_.create(COMPANY_NAME, PROGRAM_NAME);
+	writeln(path_.getConfigDir());
+	writeln(path_.getHomeDir());
+	writeln(path_.getCacheDir());
+	writeln(path_.getDataDir());
 
 	return 0;
 }
