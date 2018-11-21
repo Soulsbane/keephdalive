@@ -27,9 +27,17 @@ class KeepAliveApp : CommandServer
 		{
 			writeln(value);
 		}
-		else if(command == "set" && subCommand == "delay")
+		else if(command == "set")
 		{
-			writeln(value);
+			if(subCommand == "delay")
+			{
+
+			}
+
+			if(subCommand == "filename")
+			{
+
+			}
 		}
 		else
 		{
