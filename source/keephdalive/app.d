@@ -29,15 +29,7 @@ class KeepAliveApp : CommandServer
 		}
 		else if(command == "set")
 		{
-			if(subCommand == "delay")
-			{
-
-			}
-
-			if(subCommand == "filename")
-			{
-
-			}
+			handleSetCommand(subCommand, value);
 		}
 		else
 		{
@@ -46,6 +38,19 @@ class KeepAliveApp : CommandServer
 	}
 
 	override void onNoCommands(){}
+
+	private void handleSetCommand(const string subCommand, const string value)
+	{
+		if(subCommand == "delay")
+		{
+
+		}
+
+		if(subCommand == "filename")
+		{
+
+		}
+	}
 
 private:
 	KeepAliveWriter writer_;
