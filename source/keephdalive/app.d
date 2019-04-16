@@ -5,6 +5,16 @@ import simpleserver;
 
 class KeepAliveApp : CommandServer
 {
+	override void onStart()
+	{
+		writeln("Server started. Waiting for commands!");
+	}
+
+	override void onStop()
+	{
+		writeln("Server shutting down...");
+	}
+
 	override void onCommand(Socket client, const string command)
 	{
 		switch(command)
