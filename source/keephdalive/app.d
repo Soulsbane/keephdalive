@@ -23,7 +23,7 @@ class KeepAliveApp : CommandServer
 			case "start": writer_.start(); break; // Seems pretty obvious.
 			case "stop": writer_.stop(); break; // Stops all writing to files.
 			case "quit": break; // Makes keephdalive process quit.
-			default: break;
+			default: writeln("Invalid Command: ", command); break;
 		}
 	}
 
