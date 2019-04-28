@@ -24,7 +24,7 @@ class KeepAliveWriter : RepeatingTimer
 		if(path.exists)
 		{
 			immutable string normalizedFilePath = path.buildNormalizedPath(writeToFileName_);
-			immutable string locationsFile = path_.getAppDir("config").buildNormalizedPath(WRITE_TO_LOCATIONS_FILENAME);
+			immutable string locationsFile = path_.getAppConfigDir("config").buildNormalizedPath(WRITE_TO_LOCATIONS_FILENAME);
 			immutable bool alreadyKnownLocation = locations_.exists(path);
 
 			if(!alreadyKnownLocation)
@@ -56,9 +56,8 @@ class KeepAliveWriter : RepeatingTimer
 
 private	void loadLocations()
 	{
-		immutable string locationsPath =  path_.getAppDir("config");
-		//immutable string locationsFile = buildNormalizedPath(path_.getAppDir("config"), WRITE_TO_LOCATIONS_FILENAME);
-		immutable string locationsFile = path_.getAppDir("config").buildNormalizedPath(WRITE_TO_LOCATIONS_FILENAME);
+		immutable string locationsPath = path_.getAppConfigDir("config");
+		immutable string locationsFile = path_.getAppConfigDir("config").buildNormalizedPath(WRITE_TO_LOCATIONS_FILENAME);
 
 		if(!locationsPath.exists)
 		{
